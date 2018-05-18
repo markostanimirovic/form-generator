@@ -1,6 +1,6 @@
 # FormGenerator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1.
+Simple Form Generator created with Angular6
 
 ## Development server
 
