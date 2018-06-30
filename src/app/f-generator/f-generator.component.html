@@ -1,9 +1,19 @@
 <div class="container" style="margin-top: 15px;">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group" *ngFor="let item of items">
-      <label>{{ item.name }}</label>
-      <input [type]="item.type" class="form-control" [value]="item.value" [formControlName]="item.name">
+      <label>{{ item.label }}</label>
+      <input [type]="item.type" class="form-control" [value]="item.value ? item.value : ''"
+             [formControlName]="item.name">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div *ngIf="buttons; else defaultButtonSet">
+      <button *ngFor="let button of buttons; let i = index;" [type]="i === 0 ? 'submit' : 'button'" class="btn"
+              [ngClass]="button.style ? 'btn-' + button.style : i === 0 ? 'btn-primary' : 'btn-default'"
+              style="margin-right: 10px;" (click)="onButtonClick(i, button.name)">
+        {{ button.label }}
+      </button>
+    </div>
+    <ng-template #defaultButtonSet>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </ng-template>
   </form>
 </div>

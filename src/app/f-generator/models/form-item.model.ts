@@ -1,5 +1,6 @@
 export interface FormItem {
   name: string;
+  label: string;
   type: string;
-  value: string | number;
+  value?: string | number;
 }

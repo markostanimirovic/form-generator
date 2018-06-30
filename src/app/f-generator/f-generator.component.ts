@@ -1,16 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormItem } from './form-item.model';
+import { FormItem } from './models/form-item.model';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Button } from './models/button.model';
 
 @Component({
-  selector: 'app-f-generator',
+  selector: 'form-generator',
   templateUrl: './f-generator.component.html',
   styleUrls: ['./f-generator.component.css']
 })
 export class FGeneratorComponent implements OnInit {
 
   @Input() items: FormItem[];
-  @Output() formValue = new EventEmitter<FormGroup>();
+  @Input() buttons: Button[];
+  @Output() formValue = new EventEmitter<object>();
+  @Output() clickedButton = new EventEmitter<{ name: string, formValue: object }>();
   form: FormGroup;
   formControls: { [key: string]: FormControl } = {};
 
@@ -24,7 +27,13 @@ export class FGeneratorComponent implements OnInit {
   }
 
   onSubmit() {
-    this.formValue.emit(this.form);
+    this.formValue.emit(this.form.value);
+  }
+
+  onButtonClick(i: number, name: string) {
+    if (i > 0) {
+      this.clickedButton.emit({ name: name, formValue: this.form.value });
+    }
   }
 
 }

@@ -1,1 +1,3 @@
-<app-f-generator [items]="formItems" (formValue)="onSubmitForm($event)"></app-f-generator>
+<form-generator [items]="formItems" [buttons]="buttons"
+                (formValue)="handleSubmit($event)"
+                (clickedButton)="handleClickedButton($event)"></form-generator>
